@@ -1,3 +1,5 @@
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Question5
@@ -25,8 +27,21 @@ public class Question5
      *     2
      * Hint: Use a loop to get input. Use another 2 loops to find the mode
      */
-     
+
+    Map<Integer, Integer> numberMap = new HashMap<>();
+    int currentMaxInt = Integer.MIN_VALUE;
+    int currentMaxCount = Integer.MIN_VALUE;
     Scanner in = new Scanner(System.in);
-    
+    int numberOfInputs = in.nextInt();
+    for (int i = 0; i < numberOfInputs; i++) {
+      int input = in.nextInt();
+      int maxCountForInput = numberMap.compute(input, (k, v) -> (v == null) ? 1 : ++v);
+      if (maxCountForInput > currentMaxCount) {
+        currentMaxInt = input;
+        currentMaxCount = maxCountForInput;
+      }
+    }
+    // System.out.println(numberMap);
+    System.out.println(currentMaxInt);
   }
 }
